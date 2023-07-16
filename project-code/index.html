@@ -12,26 +12,28 @@
   <title>Frontend Mentor | Pomodoro app</title>
 </head>
 <body>
-  <h2>pomodoro</h2>
+  <h2 id="page-title">pomodoro</h2>
 
-  short break
-  long break
+  <div class="stage-container">
+    <button class="stage-btn fs-secondary stage-active">pomodoro</button>
+    <button class="stage-btn fs-secondary">short break</button>
+    <button class="stage-btn fs-secondary">long break</button>
+  </div>
 
-  start 
-  pause
-  restart
+  <div class="timer-container-outer">
+    <div class="timer-container">
+      <svg class="timer-bar" viewBox="0 0 100 100">
+        <circle class="timer-track" cx="50" cy="50" r="45"></circle>
+        <circle class="timer-fill" cx="50" cy="50" r="45"></circle>
+      </svg>
+      <h1 class="time"></h1>
+      <button class="start-btn"><h3 class="start-btn-text">start</h3></button>
+    </div>
+  </div>
 
-  Settings
-
-  Time (minutes)
-  pomodoro
-  short break
-  long break
-
-  Font
-  Color
-
-  Apply
+  <button class="settings-btn">
+    <img src="./assets/icon-settings.svg" alt="">
+  </button>
 
   <script src="./app.js"></script>
 </body>
