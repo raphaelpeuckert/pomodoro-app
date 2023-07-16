@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&family=Roboto+Slab:wght@700&family=Space+Mono:wght@700&display=swap');
+
+:root {
+    --red: #f87070;
+    --blue: #70f3f8;
+    --purple: #d881f8;
+    --blueish-gray: #d7e0ff;
+    --purpleish-blue: #1e213f;
+    --white: #ffffff;
+    --light-gray: #eff1fa;
+    --dark-blue: #161932;
+
+    --ff-primary: 'Kumbh Sans';
+    --ff-secondary: 'Roboto Slab';
+    --ff-tertiary: 'Space Mono';
+
+    --fs-h1: 10rem;
+    --fs-h2: 2.3rem;
+    --fs-h3: 1.6rem;
+    --fs-h4: 1.3rem;
+    --fs-body-primary: 1.4rem;
+    --fs-body-secondary: 1.2rem;
+
+    font-size: 62.5%;
+}
+
+.ff-1 {
+    font-family: var(--ff-primary);
+}
+.ff-2 {
+    font-family: var(--ff-secondary);
+}
+.ff-3 {
+    font-family: var(--ff-tertiary);
+}
+
+.bg-red {
+    background-color: var(--red);
+}
+.bg-blue {
+    background-color: var(--blue);
+}
+.bg-purple {
+    background-color: var(--purple);
+}
+
+.col-red {
+    color: var(--red);
+}
+.col-blue {
+    color: var(--blue);
+}
+.col-purple {
+    color: var(--purple);
+}
+
+h1 {
+    font-size: var(--fs-h1);
+    line-height: 12rem;
+    letter-spacing: -5%;
+}
+h2 {
+    font-size: var(--fs-h2);
+    line-height: 3.4rem;
+}
+h3 {
+    font-size: var(--fs-h3);
+    line-height: 1.9rem;
+    letter-spacing: 15px;
+    text-transform: uppercase;
+}
+h4 {
+    font-size: var(--fs-h4);
+    line-height: 1.6rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+.fs-primary {
+    font-size: var(--fs-body-primary);
+    line-height: 1.8rem;
+}
+.fs-secondary {
+    font-size: var(--fs-body-secondary);
+    line-height: 1.4rem;
+}
