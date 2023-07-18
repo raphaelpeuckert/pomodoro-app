@@ -9,15 +9,15 @@
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="stylesheet" href="./styles/reset.css">
   
-  <title>Frontend Mentor | Pomodoro app</title>
+  <title>Pomodoro app</title>
 </head>
 <body>
   <h2 id="page-title">pomodoro</h2>
 
   <div class="stage-container">
-    <button class="stage-btn fs-secondary stage-active">pomodoro</button>
-    <button class="stage-btn fs-secondary">short break</button>
-    <button class="stage-btn fs-secondary">long break</button>
+    <button class="stage-btn fs-primary stage-active">pomodoro</button>
+    <button class="stage-btn fs-primary">short break</button>
+    <button class="stage-btn fs-primary">long break</button>
   </div>
 
   <div class="timer-container-outer">
@@ -26,14 +26,123 @@
         <circle class="timer-track" cx="50" cy="50" r="45"></circle>
         <circle class="timer-fill" cx="50" cy="50" r="45"></circle>
       </svg>
-      <h1 class="time"></h1>
-      <button class="start-btn"><h3 class="start-btn-text">start</h3></button>
+      <h1 class="time">00:00</h1>
+      <button class="start-btn" onclick="startInterval()"><h3 class="start-btn-text">start</h3></button>
     </div>
   </div>
 
   <button class="settings-btn">
     <img src="./assets/icon-settings.svg" alt="">
   </button>
+
+  
+  <div id="settings-popup">
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button><img src="./assets/icon-close.svg" alt="&times;"></button>
+    </div>
+    <form action="" class="settings">
+      <h4>Time (Minutes)</h4>
+      <div class="time-group-container">
+        <div class="time-group">
+          <label for="pomodoro">pomodoro</label>
+          <div class="time-selector">
+            <input 
+              class="time-selector-input" 
+              type="number" 
+              name="pomodoro" 
+              id="pomodoro" 
+              value="25"
+              onchange="preventNegative()">
+            <div class="time-selector-btn-ctn">
+              <button 
+                onclick="
+                  document.getElementById('pomodoro').value = Number(document.getElementById('pomodoro').value) + 1;" 
+                class="increase-timer-btn"
+                ><img src="./assets/icon-arrow-up.svg" alt="&#8963;">
+              </button>
+              <button 
+                id="pomodoro-down"
+                onclick="
+                  document.getElementById('pomodoro').value = Number(document.getElementById('pomodoro').value) - 1;" 
+                class="decrease-timer-btn"
+                ><img src="./assets/icon-arrow-down.svg" alt="&#8964;">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="time-group">
+          <label for="short-break">short break</label>
+          <div class="time-selector">
+            <input 
+              class="time-selector-input" 
+              type="number" 
+              name="short-break" 
+              id="short-break" 
+              value="5">
+            <div class="time-selector-btn-ctn">
+              <button 
+                onclick="
+                  document.getElementById('short-break').value = Number(document.getElementById('short-break').value) + 1;" 
+                class="increase-timer-btn"
+                ><img src="./assets/icon-arrow-up.svg" alt="&#8963;">
+              </button>
+              <button 
+                id="short-break-down"
+                onclick="
+                  document.getElementById('short-break').value = Number(document.getElementById('short-break').value) - 1;" 
+                class="decrease-timer-btn"
+                ><img src="./assets/icon-arrow-down.svg" alt="&#8963;">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="time-group">
+          <label for="long-break">long break</label>
+          <div class="time-selector">
+            <input 
+              class="time-selector-input" 
+              type="number" 
+              name="long-break" 
+              id="long-break" 
+              value="20">
+            <div class="time-selector-btn-ctn">
+              <button 
+                onclick="
+                  document.getElementById('long-break').value = Number(document.getElementById('long-break').value) + 1;" 
+                class="increase-timer-btn"
+                ><img src="./assets/icon-arrow-up.svg" alt="&#8963;">
+              </button>
+              <button 
+                id="long-break-down"
+                onclick="
+                  document.getElementById('long-break').value = Number(document.getElementById('long-break').value) - 1;" 
+                class="decrease-timer-btn"
+                ><img src="./assets/icon-arrow-down.svg" alt="&#8963;">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="font-group">
+        <h4>Font</h4>
+        <div class="font-selector-group">
+          <span class="font-selector ff-1 fs-primary font-active">Aa</span>
+          <span class="font-selector ff-2 fs-primary">Aa</span>
+          <span class="font-selector ff-3 fs-primary">Aa</span>
+        </div>
+      </div>
+      <div class="color-group">
+        <h4>Color</h4>
+        <div class="color-selector-group">
+          <span class="color-selector bg-red"></span>
+          <span class="color-selector bg-blue"></span>
+          <span class="color-selector bg-purple"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="settings-overlay"></div>
 
   <script src="./app.js"></script>
 </body>
