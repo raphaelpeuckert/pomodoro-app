@@ -11,7 +11,9 @@ setTimerHeight();
 
 function setTimerHeight() {
     const timerWidth = timerCtnOuter.offsetWidth;
-    timerCtnOuter.style.height = timerWidth;
+    const timerHeight = timerCtnOuter.style.height 
+    timerHeight = timerWidth;
+    console.log(`${timerWidth} x ${timerHeight}`)
 }
 
 const stageCtn = document.querySelector('.stage-container');
