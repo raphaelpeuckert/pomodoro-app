@@ -1,5 +1,8 @@
 const body = document.querySelector('body');
+body.classList.add('ff-1');
+
 const stageCtn = document.querySelector('.stage-container');
+let activePage = 'pomodoro';
 
 stageCtn.addEventListener("click", (event) => {
     if (event.target.nodeName === "BUTTON") {
@@ -9,12 +12,27 @@ stageCtn.addEventListener("click", (event) => {
         switch (clickedButtonText) {
             case "pomodoro":
                 event.target.classList.add('stage-active');
+                activePage = 'pomodoro'
+                baseVal = document.getElementById(activePage).value;
+                baseTime(baseVal);
+                paused = true;
+                setProgress(0);
                 break;
             case "short break":
                 event.target.classList.add('stage-active');
+                activePage = 'short-break'
+                baseVal = document.getElementById(activePage).value;
+                baseTime(baseVal);
+                paused = true;
+                setProgress(0);
                 break;
             case "long break":
                 event.target.classList.add('stage-active');
+                activePage = 'long-break'
+                baseVal = document.getElementById(activePage).value;
+                baseTime(baseVal);
+                paused = true;
+                setProgress(0);
                 break;
             default:
                 console.log("Unknown button was clicked");
@@ -62,17 +80,25 @@ function setProgress(progress) {
 }
 setProgress(0)
 
+let initialBaseValMs;
+let baseValMs; 
+let percentValue;
+let paused = false;
+
+function baseTime(inputMinutes){
+    let baseSeconds = 0
+    let baseMinutes = inputMinutes;
+    timerOutEl.innerText = baseMinutes.toString().padStart(2, '0') + ":" + baseSeconds.toString().padStart(2, '0');
+    initialBaseValMs = baseVal * 60000;
+    baseValMs = baseVal * 60000;
+    percentValue = 0;
+}
+
 
 const timerOutEl = document.querySelector('.time');
-const startBtnText = document.querySelector('.start-btn-text').innerText;
 
-let baseVal = 1;
-
-let initialBaseValMs = baseVal * 60000;
-let baseValMs = baseVal * 60000;
-let percentValue = 0;
-
-let paused = false;
+let baseVal = document.getElementById('pomodoro').value;
+baseTime(baseVal)
 
 function timer() {
     if(!paused && baseValMs > 0) {
@@ -82,12 +108,44 @@ function timer() {
         setProgress(progressPercentage)
         convertToOutputTime();
     } else {
-        clearInterval(timer);
+        startBtnText.innerText = 'restart';
+        clearInterval(timerInterval);
+    }
+}
+
+let startBtnText = document.querySelector('.start-btn-text');
+
+function toggleInterval() {
+    switch(startBtnText.innerText) {
+        case 'START':
+            startInterval();
+            startBtnText.innerText = 'PAUSE'
+            break;
+        case 'PAUSE':
+            clearInterval(timerInterval)
+            startBtnText.innerText = 'RESUME'
+            break;
+        case 'RESUME':
+            startInterval();
+            startBtnText.innerText = 'PAUSE'
+            break;
+        case 'RESTART':
+            startBtnText.innerText = 'START'
+            baseVal = document.getElementById(activePage).value;
+            baseTime(baseVal);
+            paused = true;
+            setProgress(0);
+            break;
     }
 }
 
 function startInterval(){
-    setInterval(timer, 1000);
+    if(paused) {
+        paused = false;
+        timerInterval = setInterval(timer, 1000);
+    } else {
+        timerInterval = setInterval(timer, 1000);
+    }
 } 
 
 function pauseTimer(){
@@ -103,16 +161,88 @@ function restartTimer(){
     paused = false;
 }
 
-convertToOutputTime();
-
 function convertToOutputTime(){
     let outSeconds = Math.floor(baseValMs%60000)/1000;
     let outMinutes = Math.floor(baseValMs/60000)%1000;
     timerOutEl.innerText = outMinutes.toString().padStart(2, '0') + ":" + outSeconds.toString().padStart(2, '0');
 }
 
+const settingsOverlay = document.querySelector('.settings-overlay');
+const settingsPopup = document.querySelector('#settings-popup');
+const settingsCloseBtn = document.querySelector('.settings-close-btn');
 
-body.classList.add('ff-1');
+let settingsOpen = false;
+
+function toggleSettings() {
+    if(!settingsOpen) {
+        baseTime(baseVal);
+        settingsOpen = true;
+        settingsOverlay.style.display = 'block';
+        settingsPopup.style.display = 'block';
+    }  else {
+        settingsOpen = false;
+        settingsOverlay.style.display = 'none';
+        settingsPopup.style.display = 'none';
+        baseVal = document.getElementById(activePage).value;
+        baseTime(baseVal);
+        paused = true;
+        setProgress(0);
+    }
+};
+
+document.querySelector('.apply-btn-ctn').addEventListener('click', function(e) {e.preventDefault()});
+
+const fontGroup = document.querySelector('.font-selector-group');
+
+fontGroup.addEventListener("click", (event) => {
+    if (event.target.nodeName === "SPAN") {
+        const body = document.querySelector('body')
+        const clickedFont = event.target.classList;
+        document.querySelector('.font-active').classList.remove('font-active');
+        
+        if(clickedFont.contains('ff-1')) {
+            clickedFont.add('font-active');
+            body.classList.add('ff-1');
+            body.classList.remove('ff-2', 'ff-3')
+        } else if(clickedFont.contains('ff-2')) {
+            clickedFont.add('font-active');
+            body.classList.add('ff-2');
+            body.classList.remove('ff-1', 'ff-3')
+        } else if(clickedFont.contains('ff-3')) {
+            clickedFont.add('font-active');
+            body.classList.add('ff-3');
+            body.classList.remove('ff-1', 'ff-2')
+        }
+        
+        }
+    }
+);
 
 
+const colorGroup = document.querySelector('.color-selector-group');
 
+colorGroup.addEventListener("click", (event) => {
+    if (event.target.nodeName === "SPAN") {
+        const body = document.querySelector('body')
+        const clickedColor = event.target;  
+        
+        if(clickedColor.classList.contains('bg-red')) {
+            clickedColor.innerHTML = '&#10004;';
+            document.querySelector('#clr-blue').innerHTML = '';
+            document.querySelector('#clr-purple').innerHTML = '';
+            document.querySelector(':root').style.setProperty('--active-color', 'var(--red)');
+        } else if(clickedColor.classList.contains('bg-blue')) {
+            clickedColor.innerHTML = '&#10004;';
+            document.querySelector('#clr-red').innerHTML = '';
+            document.querySelector('#clr-purple').innerHTML = '';
+            document.querySelector(':root').style.setProperty('--active-color', 'var(--blue)');
+        } else if(clickedColor.classList.contains('bg-purple')) {
+            clickedColor.innerHTML = '&#10004;';
+            document.querySelector('#clr-red').innerHTML = '';
+            document.querySelector('#clr-blue').innerHTML = '';
+            document.querySelector(':root').style.setProperty('--active-color', 'var(--purple)');
+        }
+        
+        }
+    }
+);

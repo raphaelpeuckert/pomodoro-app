@@ -27,11 +27,11 @@
         <circle class="timer-fill" cx="50" cy="50" r="45"></circle>
       </svg>
       <h1 class="time">00:00</h1>
-      <button class="start-btn" onclick="startInterval()"><h3 class="start-btn-text">start</h3></button>
+      <button class="start-btn" class="start-btn" onclick="toggleInterval()"><h3 class="start-btn-text">start</h3></button>
     </div>
   </div>
 
-  <button class="settings-btn">
+  <button class="settings-btn" onclick="toggleSettings()">
     <img src="./assets/icon-settings.svg" alt="">
   </button>
 
@@ -39,7 +39,7 @@
   <div id="settings-popup">
     <div class="settings-header">
       <h2>Settings</h2>
-      <button><img src="./assets/icon-close.svg" alt="&times;"></button>
+      <button id="settings-close-btn" onclick="toggleSettings()"><img src="./assets/icon-close.svg" alt="&times;"></button>
     </div>
     <form action="" class="settings">
       <h4>Time (Minutes)</h4>
@@ -135,14 +135,17 @@
       <div class="color-group">
         <h4>Color</h4>
         <div class="color-selector-group">
-          <span class="color-selector bg-red"></span>
-          <span class="color-selector bg-blue"></span>
-          <span class="color-selector bg-purple"></span>
+          <span id="clr-red" class="color-selector bg-red">&#10004;</span>
+          <span id="clr-blue" class="color-selector bg-blue"></span>
+          <span id="clr-purple" class="color-selector bg-purple"></span>
         </div>
+      </div>
+      <div class="apply-btn-ctn">
+        <button onclick="toggleSettings()" class="settings-apply-btn">Apply</button>
       </div>
     </form>
   </div>
-  <div class="settings-overlay"></div>
+  <div class="settings-overlay" onclick="toggleSettings()"></div>
 
   <script src="./app.js"></script>
 </body>
