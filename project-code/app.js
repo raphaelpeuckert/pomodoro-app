@@ -4,9 +4,15 @@ body.classList.add('ff-1');
 const timerCtnOuter = document.querySelector('.timer-container-outer');
 
 window.addEventListener('resize', () => {
+    setTimerHeight();
+})
+
+setTimerHeight();
+
+function setTimerHeight() {
     const timerWidth = timerCtnOuter.offsetWidth;
     timerCtnOuter.style.height = timerWidth;
-})
+}
 
 const stageCtn = document.querySelector('.stage-container');
 let activePage = 'pomodoro';
