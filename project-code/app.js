@@ -11,7 +11,7 @@ setTimerHeight();
 
 function setTimerHeight() {
     const timerWidth = timerCtnOuter.offsetWidth;
-    const timerHeight = timerCtnOuter.style.height 
+    let timerHeight = timerCtnOuter.style.height 
     timerHeight = timerWidth;
     console.log(`${timerWidth} x ${timerHeight}`)
 }
