@@ -135,12 +135,17 @@ body {
     color: var(--purpleish-blue);
 }
 
-.timer-container-outer {
-    margin-top: 54px;
+.timer-frame {
+    max-width: 500px;
     aspect-ratio: 1/1;
+    width: 100%;
+    margin-top: 54px;
+}
+
+.timer-container-outer {
     padding: 22px;
     width: 100%;
-    max-width: 500px;
+    height: 100%;
     border-radius: 50%;
     background: linear-gradient(315deg, #2E325A 0%, #0E112A 100%);
     display: flex;
@@ -243,6 +248,7 @@ body {
     inset: 0;
     background-color: #0A0C1C;
     opacity: 0.5;
+    min-height: 100vh;
 }
 
 #settings-popup {
@@ -487,7 +493,7 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 1640px) {
-    .timer-container-outer {
+    .timer-frame {
         margin-top: 30px;
         max-width: 420px;
     }    
@@ -527,6 +533,9 @@ input[type="number"] {
         gap: 18px;
         justify-content: space-between;
         align-items: center;
+    }
+    .color-group {
+        padding-bottom: 0;
     }
 }
 
